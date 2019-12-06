@@ -1,5 +1,5 @@
 {
-  "name": "architect/cartservice",
+  "name": "architect-community/cartservice",
   "dependencies": {},
   "parameters": {
     "DEFAULT_TEST": {
@@ -8,7 +8,7 @@
     "INHERITED_TO": {
       "default": {
         "valueFrom": {
-          "dependency": "architect/cartservice:latest",
+          "dependency": "architect-community/cartservice:latest",
           "value": "$DEFAULT_TEST+nonsense"
         }
       }
@@ -17,7 +17,7 @@
       "description": "listen address of the server",
       "default": {
         "valueFrom": {
-          "dependency": "architect/cartservice:latest",
+          "dependency": "architect-community/cartservice:latest",
           "value": "$HOST"
         }
       }

@@ -1,19 +1,19 @@
 {
-  "name": "architect/checkoutservice",
+  "name": "architect-community/checkoutservice",
   "dependencies": {
-    "architect/emailservice": "latest",
-    "architect/paymentservice": "latest",
-    "architect/shippingservice": "latest",
-    "architect/currencyservice": "latest",
-    "architect/productcatalogservice": "latest",
-    "architect/cartservice": "latest"
+    "architect-community/emailservice": "latest",
+    "architect-community/paymentservice": "latest",
+    "architect-community/shippingservice": "latest",
+    "architect-community/currencyservice": "latest",
+    "architect-community/productcatalogservice": "latest",
+    "architect-community/cartservice": "latest"
   },
   "parameters": {
     "PRODUCT_CATALOG_SERVICE_ADDR": {
       "description": "host and port of the product catalog service",
       "default": {
         "valueFrom": {
-          "dependency": "architect/productcatalogservice:latest",
+          "dependency": "architect-community/productcatalogservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -22,7 +22,7 @@
       "description": "host and port of the shipping service",
       "default": {
         "valueFrom": {
-          "dependency": "architect/shippingservice:latest",
+          "dependency": "architect-community/shippingservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -31,7 +31,7 @@
       "description": "host and port of the payment service",
       "default": {
         "valueFrom": {
-          "dependency": "architect/paymentservice:latest",
+          "dependency": "architect-community/paymentservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -40,7 +40,7 @@
       "description": "host and port of the email service",
       "default": {
         "valueFrom": {
-          "dependency": "architect/emailservice:latest",
+          "dependency": "architect-community/emailservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -49,7 +49,7 @@
       "description": "host and port of the currency service",
       "default": {
         "valueFrom": {
-          "dependency": "architect/currencyservice:latest",
+          "dependency": "architect-community/currencyservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -58,7 +58,7 @@
       "descrption": "host and port of the cart service",
       "default": {
         "valueFrom": {
-          "dependency": "architect/cartservice:latest",
+          "dependency": "architect-community/cartservice:latest",
           "value": "$HOST:$PORT"
         }
       }

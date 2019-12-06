@@ -1,14 +1,14 @@
 {
-  "name": "architect/recommendationservice",
+  "name": "architect-community/recommendationservice",
   "dependencies": {
-    "architect/productcatalogservice": "latest"
+    "architect-community/productcatalogservice": "latest"
   },
   "parameters": {
     "PRODUCT_CATALOG_SERVICE_ADDR": {
       "description": "host and port of the product catalog service",
       "default": {
         "valueFrom": {
-          "dependency": "architect/productcatalogservice:latest",
+          "dependency": "architect-community/productcatalogservice:latest",
           "value": "$HOST:$PORT"
         }
       }
