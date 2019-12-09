@@ -1,0 +1,38 @@
+version: 2.1
+
+executors:
+  release:
+    working_directory: ~/microservices-demo
+    docker:
+      - image: node:10
+
+jobs:
+  test-microservices-demo:
+    docker:
+      - image: circleci/node:9
+        user: node
+    working_directory: ~/microservices-demo
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+      - run:
+          name: Install Architect CLI
+          command: mkdir ~/.npm-global && npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH && source ~/.profile && npm install -g @architect-io/cli && architect --version
+      - run:
+          name: Architect Login
+          command: export PATH=~/.npm-global/bin:$PATH && source ~/.profile && architect --version && architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
+      - run:
+          name: Architect Push (all services)
+          command: export PATH=~/.npm-global/bin:$PATH && source ~/.profile && git diff --dirstat=files,0 HEAD~3 | sed 's/^[ 0-9.]\+% //g' | grep src/ | while read dir; do cd $dir; echo $dir; architect push --tag=0.1.0; echo "Pushed" cd ../..; done
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-microservices-demo:
+        filters: &branches_only
+            tags:
+              ignore: /.*/
+            branches:
+              only: /.*/
