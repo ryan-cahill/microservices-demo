@@ -4,12 +4,7 @@
   "parameters": {
     "LISTEN_ADDR": {
       "description": "listen address of the server",
-      "default": {
-        "valueFrom": {
-          "dependency": "architect-community/cartservice:latest",
-          "value": "$HOST"
-        }
-      }
+      "default": "$HOST"
     },
     "REDIS_ADDR": {
       "description": "location of redis cache",
