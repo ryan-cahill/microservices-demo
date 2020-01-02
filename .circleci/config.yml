@@ -9,7 +9,7 @@ executors:
 jobs:
   test-microservices-demo:
     docker:
-      - image: circleci/node:9
+      - image: circleci/node:10
         user: node
     working_directory: ~/microservices-demo
     steps:
@@ -23,8 +23,12 @@ jobs:
           name: Architect Login
           command: export PATH=~/.npm-global/bin:$PATH && source ~/.profile && architect --version && architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
       - run:
-          name: Architect Push (all services)
-          command: export PATH=~/.npm-global/bin:$PATH && source ~/.profile && git diff --dirstat=files,0 HEAD~3 | sed 's/^[ 0-9.]\+% //g' | grep src/ | while read dir; do cd $dir; echo $dir; architect push --tag=0.1.0; echo "Pushed" cd ../..; done
+          name: Architect Push
+          command: |
+            export PATH=~/.npm-global/bin:$PATH
+            source ~/.profile
+            cd src
+            for dir in $(git diff --dirstat=files,0 HEAD~1 | sed -E 's/^[ 0-9.]+% //g' | sed '/text\|src/!d' | sed -r 's/^src\///'); do architect push -s $dir; done
 
 workflows:
   version: 2
