@@ -38,5 +38,6 @@ workflows:
         filters: &branches_only
             tags:
               ignore: /.*/
-            branches:
-              only: /.*/
+              branches:
+                only:
+                  - master
