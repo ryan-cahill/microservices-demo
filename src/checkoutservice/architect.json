@@ -1,19 +1,23 @@
 {
-  "name": "architect-community/checkoutservice",
+  "name": "hipster-shop-demo/checkoutservice",
+  "description": "Service for processing shopping carts and placing orders",
+  "keywords": [
+    "gcp", "microservices", "demo"
+  ],
   "dependencies": {
-    "architect-community/emailservice": "latest",
-    "architect-community/paymentservice": "latest",
-    "architect-community/shippingservice": "latest",
-    "architect-community/currencyservice": "latest",
-    "architect-community/productcatalogservice": "latest",
-    "architect-community/cartservice": "latest"
+    "hipster-shop-demo/emailservice": "latest",
+    "hipster-shop-demo/paymentservice": "latest",
+    "hipster-shop-demo/shippingservice": "latest",
+    "hipster-shop-demo/currencyservice": "latest",
+    "hipster-shop-demo/productcatalogservice": "latest",
+    "hipster-shop-demo/cartservice": "latest"
   },
   "parameters": {
     "PRODUCT_CATALOG_SERVICE_ADDR": {
       "description": "host and port of the product catalog service",
       "default": {
         "valueFrom": {
-          "dependency": "architect-community/productcatalogservice:latest",
+          "dependency": "hipster-shop-demo/productcatalogservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -22,7 +26,7 @@
       "description": "host and port of the shipping service",
       "default": {
         "valueFrom": {
-          "dependency": "architect-community/shippingservice:latest",
+          "dependency": "hipster-shop-demo/shippingservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -31,7 +35,7 @@
       "description": "host and port of the payment service",
       "default": {
         "valueFrom": {
-          "dependency": "architect-community/paymentservice:latest",
+          "dependency": "hipster-shop-demo/paymentservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -40,7 +44,7 @@
       "description": "host and port of the email service",
       "default": {
         "valueFrom": {
-          "dependency": "architect-community/emailservice:latest",
+          "dependency": "hipster-shop-demo/emailservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -49,7 +53,7 @@
       "description": "host and port of the currency service",
       "default": {
         "valueFrom": {
-          "dependency": "architect-community/currencyservice:latest",
+          "dependency": "hipster-shop-demo/currencyservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -58,7 +62,7 @@
       "descrption": "host and port of the cart service",
       "default": {
         "valueFrom": {
-          "dependency": "architect-community/cartservice:latest",
+          "dependency": "hipster-shop-demo/cartservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -70,9 +74,5 @@
     "definitions": []
   },
   "subscriptions": {},
-  "description": "",
-  "keywords": [
-    ""
-  ],
   "language": "go"
 }

@@ -1,5 +1,6 @@
 {
-  "name": "architect-community/cartservice",
+  "name": "hipster-shop-demo/cartservice",
+  "description": "Shopping cart service that uses a Redis cache for cart persistence.",
   "dependencies": {},
   "parameters": {
     "LISTEN_ADDR": {
@@ -27,9 +28,8 @@
     "definitions": []
   },
   "subscriptions": {},
-  "description": "",
   "keywords": [
-    ""
+    "grpc", "microservices", "demo"
   ],
   "language": "csharp"
 }

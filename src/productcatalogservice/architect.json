@@ -1,5 +1,9 @@
 {
-  "name": "architect-community/productcatalogservice",
+  "name": "hipster-shop-demo/productcatalogservice",
+  "description": "Service for searching and retrieving details on product listings.",
+  "keywords": [
+    "gcp", "microservices", "demo"
+  ],
   "dependencies": {},
   "parameters": {},
   "datastores": {},
@@ -8,9 +12,5 @@
     "definitions": []
   },
   "subscriptions": {},
-  "description": "",
-  "keywords": [
-    ""
-  ],
   "language": "go"
 }

@@ -4,40 +4,84 @@ executors:
   release:
     working_directory: ~/microservices-demo
     docker:
-      - image: node:10
-
-jobs:
-  test-microservices-demo:
-    docker:
       - image: circleci/node:10
         user: node
-    working_directory: ~/microservices-demo
+
+jobs:
+  prerelease:
+    executors: release
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
           name: Install Architect CLI
-          command: mkdir ~/.npm-global && npm config set prefix '~/.npm-global' && export PATH=~/.npm-global/bin:$PATH && source ~/.profile && npm install -g @architect-io/cli && architect --version
+          command: |
+            mkdir ~/.npm-global
+            npm config set prefix '~/.npm-global'
+            export PATH=~/.npm-global/bin:$PATH
+            source ~/.profile
+            npm install -g @architect-io/cli
+            architect --version
       - run:
           name: Architect Login
-          command: export PATH=~/.npm-global/bin:$PATH && source ~/.profile && architect --version && architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
-      - run:
-          name: Architect Push
           command: |
             export PATH=~/.npm-global/bin:$PATH
             source ~/.profile
-            cd src
-            for dir in $(git diff --dirstat=files,0 HEAD~1 | sed -E 's/^[ 0-9.]+% //g' | sed '/text\|src/!d' | sed -r 's/^src\///'); do architect push -s $dir; done
+            architect --version
+            architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
+      - run:
+          name: Push changed services
+          command: |
+            export PATH=~/.npm-global/bin:$PATH
+            source ~/.profile
+            for dir in $(git diff --dirstat=files,0 HEAD~1 src/ | sed -E 's/^[ 0-9.]+% //g'); do architect push -s $dir -t latest; done
+
+  release:
+    executors: release
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
+          - run:
+              name: Install Architect CLI
+              command: |
+                mkdir ~/.npm-global
+                npm config set prefix '~/.npm-global'
+                export PATH=~/.npm-global/bin:$PATH
+                source ~/.profile
+                npm install -g @architect-io/cli
+                architect --version
+        - run:
+            name: Architect Login
+            command: |
+              export PATH=~/.npm-global/bin:$PATH
+              source ~/.profile
+              architect --version
+              architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
+        - run:
+            name: Push changed services
+            command: |
+              export PATH=~/.npm-global/bin:$PATH
+              source ~/.profile
+              for dir in $(ls -d src/*); do architect push -s $dir -t $CIRCLE_TAG; done
 
 workflows:
   version: 2
-  test:
+  prerelease:
     jobs:
-      - test-microservices-demo:
-        filters: &branches_only
+      - prerelease:
+          filters:
             tags:
               ignore: /.*/
-              branches:
-                only:
-                  - master
+            branches:
+              only:
+                - master
+  release:
+    jobs:
+      - release:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

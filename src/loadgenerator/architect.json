@@ -1,0 +1,29 @@
+{
+  "name": "hipster-shop-demo/loadgenerator",
+  "dependencies": {
+    "hipster-shop-demo/frontend": "latest"
+  },
+  "parameters": {
+    "FRONTEND_ADDR": {
+      "description": "Location of the frontend service to send traffic to",
+      "default": {
+        "valueFrom": {
+          "dependency": "hipster-shop-demo/frontend:latest",
+          "value": "$HOST:$PORT"
+        }
+      }
+    }
+  },
+  "datastores": {},
+  "api": {
+    "type": "rest"
+  },
+  "subscriptions": {},
+  "description": "Realistic load generation service specifically targeting the hipster cart frontend",
+  "keywords": [
+    "gcp",
+    "microservices",
+    "demo"
+  ],
+  "language": "python"
+}
