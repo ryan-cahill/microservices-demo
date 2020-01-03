@@ -1,0 +1,16 @@
+{
+  "name": "architect-community/adservice",
+  "dependencies": {},
+  "parameters": {},
+  "datastores": {},
+  "api": {
+    "type": "grpc",
+    "definitions": []
+  },
+  "subscriptions": {},
+  "description": "",
+  "keywords": [
+    ""
+  ],
+  "language": "java"
+}

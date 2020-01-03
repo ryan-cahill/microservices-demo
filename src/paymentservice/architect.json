@@ -1,0 +1,16 @@
+{
+  "name": "architect-community/paymentservice",
+  "dependencies": {},
+  "parameters": {},
+  "datastores": {},
+  "api": {
+    "type": "grpc",
+    "definitions": []
+  },
+  "subscriptions": {},
+  "description": "",
+  "keywords": [
+    ""
+  ],
+  "language": "node"
+}

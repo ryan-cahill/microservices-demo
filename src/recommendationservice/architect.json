@@ -1,0 +1,32 @@
+{
+  "name": "architect-community/recommendationservice",
+  "dependencies": {
+    "architect-community/productcatalogservice": "latest"
+  },
+  "parameters": {
+    "PRODUCT_CATALOG_SERVICE_ADDR": {
+      "description": "host and port of the product catalog service",
+      "default": {
+        "valueFrom": {
+          "dependency": "architect-community/productcatalogservice:latest",
+          "value": "$HOST:$PORT"
+        }
+      }
+    },
+    "ENABLE_PROFILER": {
+      "description": "whether or not to enable the profiler",
+      "default": "0"
+    }
+  },
+  "datastores": {},
+  "api": {
+    "type": "grpc",
+    "definitions": []
+  },
+  "subscriptions": {},
+  "description": "",
+  "keywords": [
+    ""
+  ],
+  "language": "python"
+}

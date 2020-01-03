@@ -1,0 +1,16 @@
+{
+  "name": "architect-community/productcatalogservice",
+  "dependencies": {},
+  "parameters": {},
+  "datastores": {},
+  "api": {
+    "type": "grpc",
+    "definitions": []
+  },
+  "subscriptions": {},
+  "description": "",
+  "keywords": [
+    ""
+  ],
+  "language": "go"
+}
