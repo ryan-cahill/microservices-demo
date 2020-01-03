@@ -43,28 +43,28 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: false
-          - run:
-              name: Install Architect CLI
-              command: |
-                mkdir ~/.npm-global
-                npm config set prefix '~/.npm-global'
-                export PATH=~/.npm-global/bin:$PATH
-                source ~/.profile
-                npm install -g @architect-io/cli
-                architect --version
-        - run:
-            name: Architect Login
-            command: |
-              export PATH=~/.npm-global/bin:$PATH
-              source ~/.profile
-              architect --version
-              architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
-        - run:
-            name: Push changed services
-            command: |
-              export PATH=~/.npm-global/bin:$PATH
-              source ~/.profile
-              for dir in $(ls -d src/*); do architect push -s $dir -t $CIRCLE_TAG; done
+      - run:
+          name: Install Architect CLI
+          command: |
+            mkdir ~/.npm-global
+            npm config set prefix '~/.npm-global'
+            export PATH=~/.npm-global/bin:$PATH
+            source ~/.profile
+            npm install -g @architect-io/cli
+            architect --version
+      - run:
+          name: Architect Login
+          command: |
+            export PATH=~/.npm-global/bin:$PATH
+            source ~/.profile
+            architect --version
+            architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
+      - run:
+          name: Push changed services
+          command: |
+            export PATH=~/.npm-global/bin:$PATH
+            source ~/.profile
+            for dir in $(ls -d src/*); do architect push -s $dir -t $CIRCLE_TAG; done
 
 workflows:
   version: 2
