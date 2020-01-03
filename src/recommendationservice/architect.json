@@ -1,14 +1,18 @@
 {
-  "name": "architect-community/recommendationservice",
+  "name": "hipster-shop-demo/recommendationservice",
+  "description": "Service for querying recommended products",
+  "keywords": [
+    "gcp", "microservices", "demo"
+  ],
   "dependencies": {
-    "architect-community/productcatalogservice": "latest"
+    "hipster-shop-demo/productcatalogservice": "latest"
   },
   "parameters": {
     "PRODUCT_CATALOG_SERVICE_ADDR": {
       "description": "host and port of the product catalog service",
       "default": {
         "valueFrom": {
-          "dependency": "architect-community/productcatalogservice:latest",
+          "dependency": "hipster-shop-demo/productcatalogservice:latest",
           "value": "$HOST:$PORT"
         }
       }
@@ -24,9 +28,5 @@
     "definitions": []
   },
   "subscriptions": {},
-  "description": "",
-  "keywords": [
-    ""
-  ],
   "language": "python"
 }

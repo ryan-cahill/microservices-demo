@@ -1,5 +1,9 @@
 {
-  "name": "architect-community/currencyservice",
+  "name": "hipster-shop-demo/currencyservice",
+  "description": "Service for handling currency conversion",
+  "keywords": [
+    "gcp", "microservices", "demo"
+  ],
   "dependencies": {},
   "parameters": {},
   "datastores": {},
@@ -8,9 +12,5 @@
     "definitions": []
   },
   "subscriptions": {},
-  "description": "",
-  "keywords": [
-    ""
-  ],
   "language": "node"
 }

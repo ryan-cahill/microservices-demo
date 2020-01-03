@@ -1,5 +1,6 @@
 {
-  "name": "architect-community/adservice",
+  "name": "hipster-shop-demo/adservice",
+  "description": "The Ad service provides advertisement based on context keys. If no context keys are provided then it returns random ads.",
   "dependencies": {},
   "parameters": {},
   "datastores": {},
@@ -8,9 +9,8 @@
     "definitions": []
   },
   "subscriptions": {},
-  "description": "",
   "keywords": [
-    ""
+    "gcp", "microservices", "demo"
   ],
   "language": "java"
 }

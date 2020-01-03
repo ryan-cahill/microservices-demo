@@ -1,5 +1,9 @@
 {
-  "name": "architect-community/paymentservice",
+  "name": "hipster-shop-demo/paymentservice",
+  "description": "Service for processing payments upon placement of orders",
+  "keywords": [
+    "gcp", "microservices", "demo"
+  ],
   "dependencies": {},
   "parameters": {},
   "datastores": {},
@@ -8,9 +12,5 @@
     "definitions": []
   },
   "subscriptions": {},
-  "description": "",
-  "keywords": [
-    ""
-  ],
   "language": "node"
 }
