@@ -9,7 +9,7 @@ executors:
 
 jobs:
   prerelease:
-    executors: node
+    executor: node
     steps:
       - checkout
       - setup_remote_docker:
@@ -38,7 +38,7 @@ jobs:
             for dir in $(git diff --dirstat=files,0 HEAD~1 src/ | sed -E 's/^[ 0-9.]+% //g'); do architect push -s $dir -t latest; done
 
   release:
-    executors: node
+    executor: node
     steps:
       - checkout
       - setup_remote_docker:
