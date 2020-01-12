@@ -24,7 +24,9 @@ jobs:
             echo $BASH_ENV
       - run:
           name: Install Architect CLI
-          command: npm install -g @architect-io/cli
+          command: |
+            npm install -g @architect-io/cli
+            which architect
       - run:
           name: Architect Login
           command: architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
