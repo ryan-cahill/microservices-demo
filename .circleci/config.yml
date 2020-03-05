@@ -52,14 +52,14 @@ jobs:
       - setup_cli
       - run:
           name: Push changed services to prod
-          command: for dir in $(git diff --dirstat=files,0 HEAD~1 src/ | sed -E 's/^[ 0-9.]+% //g'); do architect push -s $dir -t latest; done
+          command: for dir in $(ls -d src/*); do architect push -s $dir -t latest; done
       - setup_cli:
           api_host: https://api.dev.architect.io
           app_host: https://app.dev.architect.io
           registry_host: registry.dev.architect.io
       - run:
           name: Push changed services to dev
-          command: for dir in $(git diff --dirstat=files,0 HEAD~1 src/ | sed -E 's/^[ 0-9.]+% //g'); do architect push -s $dir -t latest; done
+          command: for dir in $(ls -d src/*); do architect push -s $dir -t latest; done
 
   release:
     executor: node
