@@ -29,7 +29,12 @@
   },
   "subscriptions": {},
   "keywords": [
-    "grpc", "microservices", "demo"
+    "grpc",
+    "microservices",
+    "demo"
   ],
-  "language": "csharp"
+  "language": "csharp",
+  "interfaces": {
+    "main": 8080
+  }
 }

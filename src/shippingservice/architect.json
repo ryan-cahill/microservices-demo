@@ -2,7 +2,9 @@
   "name": "hipster-shop-demo/shippingservice",
   "description": "Service for retrieving shipping quotes and executing product shipment",
   "keywords": [
-    "gcp", "microservices", "demo"
+    "gcp",
+    "microservices",
+    "demo"
   ],
   "dependencies": {},
   "parameters": {},
@@ -12,5 +14,8 @@
     "definitions": []
   },
   "subscriptions": {},
-  "language": "go"
+  "language": "go",
+  "interfaces": {
+    "main": 8080
+  }
 }

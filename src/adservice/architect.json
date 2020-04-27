@@ -10,7 +10,12 @@
   },
   "subscriptions": {},
   "keywords": [
-    "gcp", "microservices", "demo"
+    "gcp",
+    "microservices",
+    "demo"
   ],
-  "language": "java"
+  "language": "java",
+  "interfaces": {
+    "main": 8080
+  }
 }

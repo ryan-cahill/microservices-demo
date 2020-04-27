@@ -2,7 +2,9 @@
   "name": "hipster-shop-demo/currencyservice",
   "description": "Service for handling currency conversion",
   "keywords": [
-    "gcp", "microservices", "demo"
+    "gcp",
+    "microservices",
+    "demo"
   ],
   "dependencies": {},
   "parameters": {},
@@ -12,5 +14,8 @@
     "definitions": []
   },
   "subscriptions": {},
-  "language": "node"
+  "language": "node",
+  "interfaces": {
+    "main": 8080
+  }
 }
