@@ -25,5 +25,8 @@
     "microservices",
     "demo"
   ],
-  "language": "python"
+  "language": "python",
+  "interfaces": {
+    "main": 8080
+  }
 }

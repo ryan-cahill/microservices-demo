@@ -82,7 +82,12 @@
   },
   "subscriptions": {},
   "keywords": [
-    "gcp", "microservices", "demo"
+    "gcp",
+    "microservices",
+    "demo"
   ],
-  "language": "go"
+  "language": "go",
+  "interfaces": {
+    "main": 8080
+  }
 }

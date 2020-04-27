@@ -2,7 +2,9 @@
   "name": "hipster-shop-demo/recommendationservice",
   "description": "Service for querying recommended products",
   "keywords": [
-    "gcp", "microservices", "demo"
+    "gcp",
+    "microservices",
+    "demo"
   ],
   "dependencies": {
     "hipster-shop-demo/productcatalogservice": "latest"
@@ -28,5 +30,8 @@
     "definitions": []
   },
   "subscriptions": {},
-  "language": "python"
+  "language": "python",
+  "interfaces": {
+    "main": 8080
+  }
 }
