@@ -2,7 +2,9 @@
   "name": "hipster-shop-demo/checkoutservice",
   "description": "Service for processing shopping carts and placing orders",
   "keywords": [
-    "gcp", "microservices", "demo"
+    "gcp",
+    "microservices",
+    "demo"
   ],
   "dependencies": {
     "hipster-shop-demo/emailservice": "latest",
@@ -74,5 +76,8 @@
     "definitions": []
   },
   "subscriptions": {},
-  "language": "go"
+  "language": "go",
+  "interfaces": {
+    "main": 8080
+  }
 }
