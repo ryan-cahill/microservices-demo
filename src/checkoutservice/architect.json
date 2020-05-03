@@ -61,7 +61,7 @@
       }
     },
     "CART_SERVICE_ADDR": {
-      "descrption": "host and port of the cart service",
+      "description": "host and port of the cart service",
       "default": {
         "valueFrom": {
           "dependency": "hipster-shop-demo/cartservice:latest",
