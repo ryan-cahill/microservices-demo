@@ -9,10 +9,6 @@
   "dependencies": {},
   "parameters": {},
   "datastores": {},
-  "api": {
-    "type": "grpc",
-    "definitions": []
-  },
   "subscriptions": {},
   "language": "node",
   "interfaces": {

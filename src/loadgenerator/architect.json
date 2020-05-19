@@ -15,9 +15,6 @@
     }
   },
   "datastores": {},
-  "api": {
-    "type": "rest"
-  },
   "subscriptions": {},
   "description": "Realistic load generation service specifically targeting the hipster cart frontend",
   "keywords": [

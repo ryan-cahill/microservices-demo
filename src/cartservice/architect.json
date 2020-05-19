@@ -23,10 +23,6 @@
       "port": 6379
     }
   },
-  "api": {
-    "type": "grpc",
-    "definitions": []
-  },
   "subscriptions": {},
   "keywords": [
     "grpc",

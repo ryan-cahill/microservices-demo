@@ -71,10 +71,6 @@
     }
   },
   "datastores": {},
-  "api": {
-    "type": "grpc",
-    "definitions": []
-  },
   "subscriptions": {},
   "language": "go",
   "interfaces": {
