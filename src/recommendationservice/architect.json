@@ -25,10 +25,6 @@
     }
   },
   "datastores": {},
-  "api": {
-    "type": "grpc",
-    "definitions": []
-  },
   "subscriptions": {},
   "language": "python",
   "interfaces": {
