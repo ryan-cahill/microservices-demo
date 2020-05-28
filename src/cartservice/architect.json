@@ -23,7 +23,6 @@
       "port": 6379
     }
   },
-  "subscriptions": {},
   "keywords": [
     "grpc",
     "microservices",

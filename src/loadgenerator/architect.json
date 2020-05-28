@@ -15,7 +15,6 @@
     }
   },
   "datastores": {},
-  "subscriptions": {},
   "description": "Realistic load generation service specifically targeting the hipster cart frontend",
   "keywords": [
     "gcp",

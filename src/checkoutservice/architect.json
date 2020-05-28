@@ -71,7 +71,6 @@
     }
   },
   "datastores": {},
-  "subscriptions": {},
   "language": "go",
   "interfaces": {
     "main": 8080

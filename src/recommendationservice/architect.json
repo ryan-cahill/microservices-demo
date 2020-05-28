@@ -25,7 +25,6 @@
     }
   },
   "datastores": {},
-  "subscriptions": {},
   "language": "python",
   "interfaces": {
     "main": 8080
