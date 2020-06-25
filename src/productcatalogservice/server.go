@@ -32,10 +32,11 @@ import (
 	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 
 	"cloud.google.com/go/profiler"
+	"contrib.go.opencensus.io/exporter/jaeger"
 	"contrib.go.opencensus.io/exporter/stackdriver"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/sirupsen/logrus"
-	"go.opencensus.io/exporter/jaeger"
+	//  "go.opencensus.io/exporter/jaeger"
 	"go.opencensus.io/plugin/ocgrpc"
 	"go.opencensus.io/stats/view"
 	"go.opencensus.io/trace"
@@ -74,8 +75,20 @@ func init() {
 }
 
 func main() {
-	go initTracing()
-	go initProfiling("productcatalogservice", "1.0.0")
+	if os.Getenv("DISABLE_TRACING") == "" {
+		log.Info("Tracing enabled.")
+		go initTracing()
+	} else {
+		log.Info("Tracing disabled.")
+	}
+
+	if os.Getenv("DISABLE_PROFILER") == "" {
+		log.Info("Profiling enabled.")
+		go initProfiling("productcatalogservice", "1.0.0")
+	} else {
+		log.Info("Profiling disabled.")
+	}
+
 	flag.Parse()
 
 	// set injected latency
@@ -119,8 +132,17 @@ func run(port string) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	srv := grpc.NewServer(grpc.StatsHandler(&ocgrpc.ServerHandler{}))
+	var srv *grpc.Server
+	if os.Getenv("DISABLE_STATS") == "" {
+		log.Info("Stats enabled.")
+		srv = grpc.NewServer(grpc.StatsHandler(&ocgrpc.ServerHandler{}))
+	} else {
+		log.Info("Stats disabled.")
+		srv = grpc.NewServer()
+	}
+
 	svc := &productCatalog{}
+
 	pb.RegisterProductCatalogServiceServer(srv, svc)
 	healthpb.RegisterHealthServer(srv, svc)
 	go srv.Serve(l)
