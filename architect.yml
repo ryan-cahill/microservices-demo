@@ -1,7 +1,7 @@
 name: examples/boutique
 
 dependencies:
-  example/boutique-cartservice: latest
+  examples/boutique-cartservice: latest
 
 interfaces:
   frontend: ${ services.frontend.interfaces.main.url }
@@ -18,7 +18,7 @@ services:
       PORT: ${ services.frontend.interfaces.main.port }
       PRODUCT_CATALOG_SERVICE_ADDR: ${ services.productcatalog.interfaces.main.host }:${ services.productcatalog.interfaces.main.port }
       CURRENCY_SERVICE_ADDR: ${ services.currency.interfaces.main.host }:${ services.currency.interfaces.main.port }
-      CART_SERVICE_ADDR: ${ dependencies['example/boutique-cartservice'].interfaces.api.host }:${ dependencies['example/boutique-cartservice'].interfaces.api.port }
+      CART_SERVICE_ADDR: ${ dependencies['examples/boutique-cartservice'].interfaces.api.host }:${ dependencies['examples/boutique-cartservice'].interfaces.api.port }
       RECOMMENDATION_SERVICE_ADDR: ${ services.recommendation.interfaces.main.host }:${ services.recommendation.interfaces.main.port }
       SHIPPING_SERVICE_ADDR: ${ services.shipping.interfaces.main.host }:${ services.shipping.interfaces.main.port }
       AD_SERVICE_ADDR: ${ services.ad.interfaces.main.host }:${ services.ad.interfaces.main.port }
@@ -90,7 +90,7 @@ services:
       PAYMENT_SERVICE_ADDR: ${ services.payment.interfaces.main.host }:${ services.payment.interfaces.main.port }
       EMAIL_SERVICE_ADDR: ${ services.email.interfaces.main.host }:${ services.email.interfaces.main.port }
       CURRENCY_SERVICE_ADDR: ${ services.currency.interfaces.main.host }:${ services.currency.interfaces.main.port }
-      CART_SERVICE_ADDR: ${ dependencies['example/boutique-cartservice'].interfaces.api.host }:${ dependencies['example/boutique-cartservice'].interfaces.api.port }
+      CART_SERVICE_ADDR: ${ dependencies['examples/boutique-cartservice'].interfaces.api.host }:${ dependencies['examples/boutique-cartservice'].interfaces.api.port }
 
   email:
     build:
