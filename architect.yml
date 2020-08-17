@@ -1,5 +1,8 @@
 name: examples/boutique
 
+dependencies:
+  examples/boutique-cartservice: latest
+
 interfaces:
   frontend: ${ services.frontend.interfaces.main.url }
 
@@ -15,7 +18,7 @@ services:
       PORT: ${ services.frontend.interfaces.main.port }
       PRODUCT_CATALOG_SERVICE_ADDR: ${ services.productcatalog.interfaces.main.host }:${ services.productcatalog.interfaces.main.port }
       CURRENCY_SERVICE_ADDR: ${ services.currency.interfaces.main.host }:${ services.currency.interfaces.main.port }
-      CART_SERVICE_ADDR: ${ services.cart.interfaces.main.host }:${ services.cart.interfaces.main.port }
+      CART_SERVICE_ADDR: ${ dependencies['examples/boutique-cartservice'].interfaces.api.host }:${ dependencies['examples/boutique-cartservice'].interfaces.api.port }
       RECOMMENDATION_SERVICE_ADDR: ${ services.recommendation.interfaces.main.host }:${ services.recommendation.interfaces.main.port }
       SHIPPING_SERVICE_ADDR: ${ services.shipping.interfaces.main.host }:${ services.shipping.interfaces.main.port }
       AD_SERVICE_ADDR: ${ services.ad.interfaces.main.host }:${ services.ad.interfaces.main.port }
@@ -40,23 +43,6 @@ services:
       main: 8080
     environment:
       PORT: ${ services.currency.interfaces.main.port }
-
-  cart:
-    build:
-      context: ./src/cartservice
-    description: Shopping cart service that uses a Redis cache for cart persistence.
-    language: csharp
-    interfaces:
-      main: 8080
-    environment:
-      PORT: ${ services.cart.interfaces.main.port }
-      LISTEN_ADDR: 0.0.0.0
-      REDIS_ADDR: ${ services.cart-db.interfaces.main.host }:${ services.cart-db.interfaces.main.port }
-
-  cart-db:
-    image: redis
-    interfaces:
-      main: 6379
 
   recommendation:
     build:
@@ -104,7 +90,7 @@ services:
       PAYMENT_SERVICE_ADDR: ${ services.payment.interfaces.main.host }:${ services.payment.interfaces.main.port }
       EMAIL_SERVICE_ADDR: ${ services.email.interfaces.main.host }:${ services.email.interfaces.main.port }
       CURRENCY_SERVICE_ADDR: ${ services.currency.interfaces.main.host }:${ services.currency.interfaces.main.port }
-      CART_SERVICE_ADDR: ${ services.cart.interfaces.main.host }:${ services.cart.interfaces.main.port }
+      CART_SERVICE_ADDR: ${ dependencies['examples/boutique-cartservice'].interfaces.api.host }:${ dependencies['examples/boutique-cartservice'].interfaces.api.port }
 
   email:
     build:
