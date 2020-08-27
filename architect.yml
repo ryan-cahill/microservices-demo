@@ -4,7 +4,7 @@ dependencies:
   examples/boutique-cartservice: latest
 
 interfaces:
-  frontend: ${ services.frontend.interfaces.main.url }
+  frontend: ${{ services.frontend.interfaces.main.url }}
 
 services:
   frontend:
@@ -15,14 +15,14 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.frontend.interfaces.main.port }
-      PRODUCT_CATALOG_SERVICE_ADDR: ${ services.productcatalog.interfaces.main.host }:${ services.productcatalog.interfaces.main.port }
-      CURRENCY_SERVICE_ADDR: ${ services.currency.interfaces.main.host }:${ services.currency.interfaces.main.port }
-      CART_SERVICE_ADDR: ${ dependencies['examples/boutique-cartservice'].interfaces.api.host }:${ dependencies['examples/boutique-cartservice'].interfaces.api.port }
-      RECOMMENDATION_SERVICE_ADDR: ${ services.recommendation.interfaces.main.host }:${ services.recommendation.interfaces.main.port }
-      SHIPPING_SERVICE_ADDR: ${ services.shipping.interfaces.main.host }:${ services.shipping.interfaces.main.port }
-      AD_SERVICE_ADDR: ${ services.ad.interfaces.main.host }:${ services.ad.interfaces.main.port }
-      CHECKOUT_SERVICE_ADDR: ${ services.checkout.interfaces.main.host }:${ services.checkout.interfaces.main.port }
+      PORT: ${{ services.frontend.interfaces.main.port }}
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ services.productcatalog.interfaces.main.host }}:${{ services.productcatalog.interfaces.main.port }}
+      CURRENCY_SERVICE_ADDR: ${{ services.currency.interfaces.main.host }}:${{ services.currency.interfaces.main.port }}
+      CART_SERVICE_ADDR: ${{ dependencies['examples/boutique-cartservice'].interfaces.api.host }}:${{ dependencies['examples/boutique-cartservice'].interfaces.api.port }}
+      RECOMMENDATION_SERVICE_ADDR: ${{ services.recommendation.interfaces.main.host }}:${{ services.recommendation.interfaces.main.port }}
+      SHIPPING_SERVICE_ADDR: ${{ services.shipping.interfaces.main.host }}:${{ services.shipping.interfaces.main.port }}
+      AD_SERVICE_ADDR: ${{ services.ad.interfaces.main.host }}:${{ services.ad.interfaces.main.port }}
+      CHECKOUT_SERVICE_ADDR: ${{ services.checkout.interfaces.main.host }}:${{ services.checkout.interfaces.main.port }}
 
   productcatalog:
     build:
@@ -32,7 +32,7 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.productcatalog.interfaces.main.port }
+      PORT: ${{ services.productcatalog.interfaces.main.port }}
 
   currency:
     build:
@@ -42,7 +42,7 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.currency.interfaces.main.port }
+      PORT: ${{ services.currency.interfaces.main.port }}
 
   recommendation:
     build:
@@ -52,9 +52,9 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.recommendation.interfaces.main.port }
+      PORT: ${{ services.recommendation.interfaces.main.port }}
       ENABLE_PROFILER: 0
-      PRODUCT_CATALOG_SERVICE_ADDR: ${ services.productcatalog.interfaces.main.host }:${ services.productcatalog.interfaces.main.port }
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ services.productcatalog.interfaces.main.host }}:${{ services.productcatalog.interfaces.main.port }}
 
   shipping:
     build:
@@ -64,7 +64,7 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.shipping.interfaces.main.port }
+      PORT: ${{ services.shipping.interfaces.main.port }}
 
   ad:
     build:
@@ -74,7 +74,7 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.ad.interfaces.main.port }
+      PORT: ${{ services.ad.interfaces.main.port }}
 
   checkout:
     build:
@@ -84,13 +84,13 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.checkout.interfaces.main.port }
-      PRODUCT_CATALOG_SERVICE_ADDR: ${ services.productcatalog.interfaces.main.host }:${ services.productcatalog.interfaces.main.port }
-      SHIPPING_SERVICE_ADDR: ${ services.shipping.interfaces.main.host }:${ services.shipping.interfaces.main.port }
-      PAYMENT_SERVICE_ADDR: ${ services.payment.interfaces.main.host }:${ services.payment.interfaces.main.port }
-      EMAIL_SERVICE_ADDR: ${ services.email.interfaces.main.host }:${ services.email.interfaces.main.port }
-      CURRENCY_SERVICE_ADDR: ${ services.currency.interfaces.main.host }:${ services.currency.interfaces.main.port }
-      CART_SERVICE_ADDR: ${ dependencies['examples/boutique-cartservice'].interfaces.api.host }:${ dependencies['examples/boutique-cartservice'].interfaces.api.port }
+      PORT: ${{ services.checkout.interfaces.main.port }}
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ services.productcatalog.interfaces.main.host }}:${{ services.productcatalog.interfaces.main.port }}
+      SHIPPING_SERVICE_ADDR: ${{ services.shipping.interfaces.main.host }}:${{ services.shipping.interfaces.main.port }}
+      PAYMENT_SERVICE_ADDR: ${{ services.payment.interfaces.main.host }}:${{ services.payment.interfaces.main.port }}
+      EMAIL_SERVICE_ADDR: ${{ services.email.interfaces.main.host }}:${{ services.email.interfaces.main.port }}
+      CURRENCY_SERVICE_ADDR: ${{ services.currency.interfaces.main.host }}:${{ services.currency.interfaces.main.port }}
+      CART_SERVICE_ADDR: ${{ dependencies['examples/boutique-cartservice'].interfaces.api.host }}:${{ dependencies['examples/boutique-cartservice'].interfaces.api.port }}
 
   email:
     build:
@@ -100,7 +100,7 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.email.interfaces.main.port }
+      PORT: ${{ services.email.interfaces.main.port }}
 
   payment:
     build:
@@ -110,4 +110,4 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.payment.interfaces.main.port }
+      PORT: ${{ services.payment.interfaces.main.port }}
