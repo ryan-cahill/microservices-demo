@@ -18,11 +18,11 @@ services:
     interfaces:
       main: 8080
     environment:
-      PORT: ${ services.cartservice.interfaces.main.port }
+      PORT: ${{ services.cartservice.interfaces.main.port }}
       LISTEN_ADDR: 0.0.0.0
-      REDIS_ADDR: ${ services.cart-db.interfaces.main.host }:${ services.cart-db.interfaces.main.port }
+      REDIS_ADDR: ${{ services.cart-db.interfaces.main.host }}:${{ services.cart-db.interfaces.main.port }}
 
 interfaces:
   api:
     description: Exposes the cart service API to upstream callers
-    url: ${ services.cartservice.interfaces.main.url }
+    url: ${{ services.cartservice.interfaces.main.url }}
