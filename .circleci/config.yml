@@ -40,7 +40,7 @@ commands:
             architect config:set registry_host << parameters.registry_host >>
       - run:
           name: Architect Login
-          command: architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
+          command: architect login -e $ARCHITECT_EMAIL -p $ARCHITECT_PASSWORD
 
 jobs:
   prerelease:
