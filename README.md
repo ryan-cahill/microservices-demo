@@ -104,12 +104,7 @@ Once the application is done booting, the shop will be available on http://shop.
 
 > 💡 Recommended if you're using Architect Cloud and want to try it on a real cluster.
 
-1. Create a free user/account with [Architect](https://app.architect.io/signup)
-2. Deploy remotely via the cli
-```bash
-$ architect login
-$ architect deploy examples/boutique:latest --account <ACCOUNT_NAME> --environment example-environment
-```
+[![Deploy Button](https://www.architect.io/deploy-button.svg)](https://app.architect.io/examples/components/boutique/deploy?tag=latest&interface=shop%3Afrontend)
 
 ## Conferences featuring Online Boutique
 
