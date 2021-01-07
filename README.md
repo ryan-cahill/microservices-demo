@@ -24,8 +24,8 @@ Looking for the old Hipster Shop frontend interface? Use the [manifests](https:/
 
 ## Screenshots
 
-| Home Page                                                                                                         | Checkout Screen                                                                                                    |
-| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Home Page                                                                                                               | Checkout Screen                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | [![Screenshot of store homepage](./docs/img/online-boutique-frontend-1.png)](./docs/img/online-boutique-frontend-1.png) | [![Screenshot of checkout screen](./docs/img/online-boutique-frontend-2.png)](./docs/img/online-boutique-frontend-2.png) |
 
 ## Service Architecture
@@ -104,7 +104,7 @@ Once the application is done booting, the shop will be available on http://shop.
 
 > 💡 Recommended if you're using Architect Cloud and want to try it on a real cluster.
 
-[![Deploy Button](https://www.architect.io/deploy-button.svg)](https://app.architect.io/examples/components/boutique/deploy?tag=latest&interface=shop%3Afrontend)
+[![Deploy Button](https://www.architect.io/deploy-button.svg)](https://cloud.architect.io/examples/components/boutique/deploy?tag=latest&interface=shop%3Afrontend)
 
 ## Conferences featuring Online Boutique
 

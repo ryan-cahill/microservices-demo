@@ -19,7 +19,7 @@ commands:
         default: registry.architect.io
       app_host:
         type: string
-        default: https://app.architect.io
+        default: https://cloud.architect.io
     steps:
       - run:
           name: Setup NPM bin path
@@ -55,7 +55,7 @@ jobs:
           command: for dir in $(ls -d src/*); do architect push -s $dir -t latest; done
       - setup_cli:
           api_host: https://api.dev.architect.io
-          app_host: https://app.dev.architect.io
+          app_host: https://cloud.dev.architect.io
           registry_host: registry.dev.architect.io
       - run:
           name: Push changed services to dev
@@ -73,7 +73,7 @@ jobs:
           command: for dir in $(ls -d src/*); do architect push -s $dir -t $CIRCLE_TAG; done
       - setup_cli:
           api_host: https://api.dev.architect.io
-          app_host: https://app.dev.architect.io
+          app_host: https://cloud.dev.architect.io
           registry_host: registry.dev.architect.io
       - run:
           name: Push changed services to dev
