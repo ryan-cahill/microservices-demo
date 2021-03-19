@@ -16,7 +16,7 @@ services:
     build:
       context: ./
     interfaces:
-      main: 8080
+      main: 7070
     environment:
       PORT: ${{ services.cartservice.interfaces.main.port }}
       LISTEN_ADDR: 0.0.0.0
