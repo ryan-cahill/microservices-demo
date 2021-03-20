@@ -31,7 +31,7 @@ services:
     description: Service for searching and retrieving details on product listings.
     language: go
     interfaces:
-      main: 8080
+      main: 3550
     environment:
       PORT: ${{ services.productcatalog.interfaces.main.port }}
 
@@ -41,7 +41,7 @@ services:
     description: Service for handling currency conversion.
     language: node
     interfaces:
-      main: 8080
+      main: 7000
     environment:
       PORT: ${{ services.currency.interfaces.main.port }}
 
@@ -63,7 +63,7 @@ services:
     description: Service for retrieving shipping quotes and executing product shipment.
     language: go
     interfaces:
-      main: 8080
+      main: 50051
     environment:
       PORT: ${{ services.shipping.interfaces.main.port }}
 
@@ -73,7 +73,7 @@ services:
     description: The Ad service provides advertisement based on context keys. If no context keys are provided then it returns random ads.
     language: java
     interfaces:
-      main: 8080
+      main: 9555
     environment:
       PORT: ${{ services.ad.interfaces.main.port }}
 
@@ -83,7 +83,7 @@ services:
     description: Service for processing shopping carts and placing orders.
     language: go
     interfaces:
-      main: 8080
+      main: 5050
     environment:
       PORT: ${{ services.checkout.interfaces.main.port }}
       PRODUCT_CATALOG_SERVICE_ADDR: ${{ services.productcatalog.interfaces.main.host }}:${{ services.productcatalog.interfaces.main.port }}
@@ -109,6 +109,6 @@ services:
     description: Service for processing payments upon placement of orders.
     language: node
     interfaces:
-      main: 8080
+      main: 50051
     environment:
       PORT: ${{ services.payment.interfaces.main.port }}
