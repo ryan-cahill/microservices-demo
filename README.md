@@ -194,7 +194,7 @@ $ architect link ./src/cartservice/architect.yml
 $ architect link ./architect.yml
 $ architect deploy --local examples/boutique:latest --interface shop:frontend
 ```
-Once the application is done booting, the shop will be available on http://shop.localhost/
+Once the application is done booting, the shop will be available on http://shop.arc.localhost/
 
 ### Option 2: Running remotely
 
