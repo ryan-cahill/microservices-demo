@@ -14,9 +14,9 @@ services:
     description: Frontend webapp powering the Boutique shop.
     language: go
     interfaces:
-      main: 8080
+      main: &frontend-port 8080
     environment:
-      PORT: ${{ services.frontend.interfaces.main.port }}
+      PORT: *frontend-port
       PRODUCT_CATALOG_SERVICE_ADDR: ${{ services.productcatalog.interfaces.main.host }}:${{ services.productcatalog.interfaces.main.port }}
       CURRENCY_SERVICE_ADDR: ${{ services.currency.interfaces.main.host }}:${{ services.currency.interfaces.main.port }}
       CART_SERVICE_ADDR: ${{ dependencies['examples/boutique-cartservice'].interfaces.api.host }}:${{ dependencies['examples/boutique-cartservice'].interfaces.api.port }}
@@ -31,9 +31,9 @@ services:
     description: Service for searching and retrieving details on product listings.
     language: go
     interfaces:
-      main: 3550
+      main: &productcatalog-port 3550
     environment:
-      PORT: ${{ services.productcatalog.interfaces.main.port }}
+      PORT: *productcatalog-port
 
   currency:
     build:
@@ -41,9 +41,9 @@ services:
     description: Service for handling currency conversion.
     language: node
     interfaces:
-      main: 7000
+      main: &currency-port 7000
     environment:
-      PORT: ${{ services.currency.interfaces.main.port }}
+      PORT: *currency-port
 
   recommendation:
     build:
@@ -51,9 +51,9 @@ services:
     description: Service for querying recommended products.
     language: python
     interfaces:
-      main: 8080
+      main: &recommendation-port 8080
     environment:
-      PORT: ${{ services.recommendation.interfaces.main.port }}
+      PORT: *recommendation-port
       ENABLE_PROFILER: 0
       PRODUCT_CATALOG_SERVICE_ADDR: ${{ services.productcatalog.interfaces.main.host }}:${{ services.productcatalog.interfaces.main.port }}
 
@@ -63,9 +63,9 @@ services:
     description: Service for retrieving shipping quotes and executing product shipment.
     language: go
     interfaces:
-      main: 50051
+      main: &shipping-port 50051
     environment:
-      PORT: ${{ services.shipping.interfaces.main.port }}
+      PORT: *shipping-port
 
   ad:
     build:
@@ -73,9 +73,9 @@ services:
     description: The Ad service provides advertisement based on context keys. If no context keys are provided then it returns random ads.
     language: java
     interfaces:
-      main: 9555
+      main: &ad-port 9555
     environment:
-      PORT: ${{ services.ad.interfaces.main.port }}
+      PORT: *ad-port
 
   checkout:
     build:
@@ -83,9 +83,9 @@ services:
     description: Service for processing shopping carts and placing orders.
     language: go
     interfaces:
-      main: 5050
+      main: &checkout-port 5050
     environment:
-      PORT: ${{ services.checkout.interfaces.main.port }}
+      PORT: *checkout-port
       PRODUCT_CATALOG_SERVICE_ADDR: ${{ services.productcatalog.interfaces.main.host }}:${{ services.productcatalog.interfaces.main.port }}
       SHIPPING_SERVICE_ADDR: ${{ services.shipping.interfaces.main.host }}:${{ services.shipping.interfaces.main.port }}
       PAYMENT_SERVICE_ADDR: ${{ services.payment.interfaces.main.host }}:${{ services.payment.interfaces.main.port }}
@@ -99,9 +99,9 @@ services:
     description: Service for sending order confirmations via email.
     language: python
     interfaces:
-      main: 8080
+      main: &email-port 8080
     environment:
-      PORT: ${{ services.email.interfaces.main.port }}
+      PORT: *email-port
 
   payment:
     build:
@@ -109,6 +109,6 @@ services:
     description: Service for processing payments upon placement of orders.
     language: node
     interfaces:
-      main: 50051
+      main: &payment-port 50051
     environment:
-      PORT: ${{ services.payment.interfaces.main.port }}
+      PORT: *payment-port

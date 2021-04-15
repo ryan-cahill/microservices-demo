@@ -16,9 +16,9 @@ services:
     build:
       context: ./
     interfaces:
-      main: 7070
+      main: &cart-port 7070
     environment:
-      PORT: ${{ services.cartservice.interfaces.main.port }}
+      PORT: *cart-port
       LISTEN_ADDR: 0.0.0.0
       REDIS_ADDR: ${{ services.cart-db.interfaces.main.host }}:${{ services.cart-db.interfaces.main.port }}
 
