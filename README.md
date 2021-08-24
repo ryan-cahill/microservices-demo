@@ -30,10 +30,9 @@ Looking for the old Hipster Shop frontend interface? Use the [manifests](https:/
 | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | [![Screenshot of store homepage](./docs/img/online-boutique-frontend-1.png)](./docs/img/online-boutique-frontend-1.png) | [![Screenshot of checkout screen](./docs/img/online-boutique-frontend-2.png)](./docs/img/online-boutique-frontend-2.png) |
 
-
 ## Quickstart (GKE)
 
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/microservices-demo&cloudshell_tutorial=README.md)
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/microservices-demo&cloudshell_workspace=.&cloudshell_tutorial=docs/cloudshell-tutorial.md)
 
 1. **[Create a Google Cloud Platform project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project)** or use an existing project. Set the `PROJECT_ID` environment variable and ensure the Google Kubernetes Engine and Cloud Operations APIs are enabled.
 
@@ -55,6 +54,18 @@ cd microservices-demo
 ```
 
 3. **Create a GKE cluster.**
+
+- GKE autopilot mode (see [Autopilot
+overview](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview)
+to learn more):
+
+```
+REGION=us-central1
+gcloud container clusters create-auto onlineboutique \
+    --project=${PROJECT_ID} --region=${REGION}
+```
+
+- GKE Standard mode:
 
 ```
 ZONE=us-central1-b
@@ -168,39 +179,6 @@ Find **Protocol Buffers Descriptions** at the [`./pb` directory](./pb).
 - **Synthetic Load Generation:** The application demo comes with a background
   job that creates realistic usage patterns on the website using
   [Locust](https://locust.io/) load generator.
-
-## Installation
-
-We offer the following installation methods:
-
-1. **Running locally** (~20 minutes) You will build and deploy locally via Architect.
-
-2. **Running remotely** (~10 minutes) You will deploy remotely to the Architect Cloud.
-
-### Prerequisites
-
-This project uses [Architect](https://architect.io) to deploy and manage our services simultaneously. Install Architect's CLI to deploy the services:
-
-```bash
-$ npm install -g @architect-io/cli
-```
-
-### Option 1: Running locally
-
-> 💡 Recommended if you're planning to develop the application or giving it a try.
-
-```bash
-$ architect link ./src/cartservice/architect.yml
-$ architect link ./architect.yml
-$ architect deploy --local examples/boutique:latest --interface shop:frontend
-```
-Once the application is done booting, the shop will be available on http://shop.arc.localhost/
-
-### Option 2: Running remotely
-
-> 💡 Recommended if you're using Architect Cloud and want to try it on a real cluster.
-
-[![Deploy Button](https://www.architect.io/deploy-button.svg)](https://cloud.architect.io/examples/components/boutique/deploy?tag=latest&interface=shop%3Afrontend)
 
 ## Local Development
 
