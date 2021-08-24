@@ -14,7 +14,7 @@ services:
 
   cartservice:
     build:
-      context: ./
+      context: ./src/
     interfaces:
       main: &cart-port 7070
     environment:
