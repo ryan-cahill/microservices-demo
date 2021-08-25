@@ -1,5 +1,7 @@
 name: boutique-shop/ads
 description: Advertisement service used as part of the boutique shop microservices demo
+keywords:
+  - change-trigger
 
 services:
   ad:
