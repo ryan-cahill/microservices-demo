@@ -17,6 +17,7 @@ jobs:
         name: Detect changes
         run: |
           export CHANGED_DIRS=$(find ./src/*/architect.yml -type f -maxdepth 0 -exec sh -c 'test $(git diff-tree --name-only --no-commit-id -r ${{ github.sha }} -- $(dirname $1) | wc -c) -ne 0 && dirname $1' sh {}  \;)
+          find ./src/*/architect.yml -type f -maxdepth 0
           echo $CHANGED_DIRS
           echo "::set-output name=matrix::$(jq -n -c --arg v "$CHANGED_DIRS" '{"component_path": $v | split("\n") }')"
     outputs:
