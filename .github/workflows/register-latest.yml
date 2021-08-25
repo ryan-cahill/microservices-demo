@@ -1,4 +1,4 @@
-name: Register latest
+name: Register latest changes
 
 on:
   push:
