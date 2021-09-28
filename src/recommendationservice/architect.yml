@@ -2,7 +2,7 @@ name: boutique-shop/recommendations
 description: Recommendations service used as part of the boutique shop microservices demo
 
 dependencies:
-  boutique-shop/product-catalog: latest
+  boutique-shop/product-catalog: v1
 
 services:
   recommendations:
