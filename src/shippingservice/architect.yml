@@ -6,7 +6,9 @@ services:
     build:
       context: ./
     interfaces:
-      main: 50051
+      main:
+        port: 50051
+        protocol: grpc
     environment:
       PORT: 50051
 

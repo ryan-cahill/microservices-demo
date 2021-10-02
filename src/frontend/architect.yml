@@ -18,15 +18,17 @@ services:
       main: 8080
     environment:
       PORT: 8080
-      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['boutique-shop/product-catalog'].interfaces.api.host }}:${{ dependencies['boutique-shop/product-catalog'].interfaces.api.port }}
-      CURRENCY_SERVICE_ADDR: ${{ dependencies['boutique-shop/currency'].interfaces.api.host }}:${{ dependencies['boutique-shop/currency'].interfaces.api.port }}
-      CART_SERVICE_ADDR: ${{ dependencies['boutique-shop/shopping-cart'].interfaces.api.host }}:${{ dependencies['boutique-shop/shopping-cart'].interfaces.api.port }}
-      RECOMMENDATION_SERVICE_ADDR: ${{ dependencies['boutique-shop/recommendations'].interfaces.api.host }}:${{ dependencies['boutique-shop/recommendations'].interfaces.api.port }}
-      SHIPPING_SERVICE_ADDR: ${{ dependencies['boutique-shop/shipping'].interfaces.api.host }}:${{ dependencies['boutique-shop/shipping'].interfaces.api.port }}
-      AD_SERVICE_ADDR: ${{ dependencies['boutique-shop/ads'].interfaces.api.host }}:${{ dependencies['boutique-shop/ads'].interfaces.api.port }}
-      CHECKOUT_SERVICE_ADDR: ${{ dependencies['boutique-shop/checkout'].interfaces.api.host }}:${{ dependencies['boutique-shop/checkout'].interfaces.api.port }}
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['boutique-shop/product-catalog'].interfaces.api.url }}
+      CURRENCY_SERVICE_ADDR: ${{ dependencies['boutique-shop/currency'].interfaces.api.url }}
+      CART_SERVICE_ADDR: ${{ dependencies['boutique-shop/shopping-cart'].interfaces.api.url }}
+      RECOMMENDATION_SERVICE_ADDR: ${{ dependencies['boutique-shop/recommendations'].interfaces.api.url }}
+      SHIPPING_SERVICE_ADDR: ${{ dependencies['boutique-shop/shipping'].interfaces.api.url }}
+      AD_SERVICE_ADDR: ${{ dependencies['boutique-shop/ads'].interfaces.api.url }}
+      CHECKOUT_SERVICE_ADDR: ${{ dependencies['boutique-shop/checkout'].interfaces.api.url }}
 
 interfaces:
   frontend:
     description: Exposes the boutique shop webapp to upstream callers or the public web
     url: ${{ services.frontend.interfaces.main.url }}
+    ingress:
+      subdomain: shop

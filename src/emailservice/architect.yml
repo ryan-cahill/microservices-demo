@@ -6,7 +6,9 @@ services:
     build:
       context: ./
     interfaces:
-      main: 8080
+      main:
+        port: 8080
+        protocol: grpc
     environment:
       PORT: 8080
 
