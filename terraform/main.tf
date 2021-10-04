@@ -39,6 +39,8 @@ module "network" {
 
   depends_on = [azurerm_resource_group.architect]
 
+  subnet_enforce_private_link_endpoint_network_policies = { subnet1 = true }
+
   tags = local.tags
 }
 
@@ -74,6 +76,8 @@ resource "azurerm_redis_cache" "redis" {
   shard_count         = 0
   capacity            = 1
 
+  # public_network_access_enabled = true # remove if private endpoints work?
+
   redis_version = 4
 
   depends_on = [
@@ -93,7 +97,50 @@ resource "azurerm_redis_firewall_rule" "redis_firewall_rule" {
   end_ip   = cidrhost(module.network.vnet_address_space[0], -1)
 }
 
+resource "azurerm_private_endpoint" "redis_private_endpoint" {
+  name                = "${var.prefix}-private-endpoint"
+  location            = azurerm_resource_group.architect.location
+  resource_group_name = azurerm_resource_group.architect.name
+  subnet_id           = module.network.vnet_subnets[0]
+  tags                = local.tags
 
+  private_service_connection {
+    name                           = "${var.prefix}-rediscache-privatelink"
+    is_manual_connection           = false
+    private_connection_resource_id = azurerm_redis_cache.redis.id
+    subresource_names              = ["redisCache"]
+  }
 
-// TODO: create private endpoint for redis
-// TODO: private link service?
+  private_dns_zone_group {
+    name = azurerm_private_dns_zone.dns_zone.name
+    private_dns_zone_ids = [azurerm_private_dns_zone.dns_zone.id]
+  }
+}
+
+data "azurerm_private_endpoint_connection" "private-ip" {
+  name                = azurerm_private_endpoint.redis_private_endpoint.name
+  resource_group_name = azurerm_resource_group.architect.name
+  depends_on          = [azurerm_redis_cache.redis]
+}
+
+resource "azurerm_private_dns_zone" "dns_zone" {
+  name                = "${var.prefix}.privatelink.redis.cache.windows.net"
+  resource_group_name = azurerm_resource_group.architect.name
+  tags                = local.tags
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "vnet_link" {
+  name                  = "${var.prefix}-vnet-private-zone-link"
+  resource_group_name   = azurerm_resource_group.architect.name
+  private_dns_zone_name = azurerm_private_dns_zone.dns_zone.name
+  virtual_network_id    = module.network.vnet_id
+  tags                  = local.tags
+}
+
+resource "azurerm_private_dns_a_record" "a_record" {
+  name                = azurerm_redis_cache.redis.name
+  zone_name           = azurerm_private_dns_zone.dns_zone.name
+  resource_group_name = azurerm_resource_group.architect.name
+  ttl                 = 300
+  records             = [data.azurerm_private_endpoint_connection.private-ip.private_service_connection.0.private_ip_address]
+}
