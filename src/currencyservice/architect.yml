@@ -6,7 +6,9 @@ services:
     build:
       context: ./
     interfaces:
-      main: 7000
+      main:
+        port: 7000
+        protocol: grpc
     environment:
       PORT: 7000
 

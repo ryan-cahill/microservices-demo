@@ -30,7 +30,9 @@ services:
     build:
       context: ./src
     interfaces:
-      main: 7070
+      main:
+        port: 7070
+        protocol: grpc
     environment:
       PORT: 7070
       LISTEN_ADDR: 0.0.0.0
