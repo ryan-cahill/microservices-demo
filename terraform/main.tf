@@ -64,6 +64,21 @@ resource "azurerm_network_security_rule" "ssh" {
   destination_address_prefix = "*"
 }
 
+resource "azurerm_network_security_rule" "app" {
+  name                        = "${var.prefix}-app-rule"
+  resource_group_name         = azurerm_resource_group.architect.name
+  network_security_group_name = data.azurerm_network_security_group.vm_nsg.name
+
+  priority                   = 101
+  direction                  = "Inbound"
+  access                     = "Allow"
+  protocol                   = "Tcp"
+  source_port_range          = "*"
+  destination_port_range     = "7070"
+  source_address_prefix      = "*"
+  destination_address_prefix = "*"
+}
+
 resource "azurerm_redis_cache" "redis" {
   name                = "${var.prefix}-redis"
   location            = azurerm_resource_group.architect.location
@@ -75,8 +90,6 @@ resource "azurerm_redis_cache" "redis" {
   enable_non_ssl_port = true # enable 6379
   shard_count         = 0
   capacity            = 1
-
-  # public_network_access_enabled = true # remove if private endpoints work?
 
   redis_version = 4
 
@@ -143,4 +156,50 @@ resource "azurerm_private_dns_a_record" "a_record" {
   resource_group_name = azurerm_resource_group.architect.name
   ttl                 = 300
   records             = [data.azurerm_private_endpoint_connection.private-ip.private_service_connection.0.private_ip_address]
+}
+
+# data "azuread_group" "aks_cluster_admins" {
+#   name = "AKS-cluster-admins"
+# }
+
+
+# Enabling preview features for the Azure subscription is currently required due to https://github.com/hashicorp/terraform-provider-azurerm/issues/11396
+# https://docs.microsoft.com/en-us/azure/aks/upgrade-cluster#set-auto-upgrade-channel
+module "aks" {
+  source                           = "Azure/aks/azurerm"
+  resource_group_name              = azurerm_resource_group.architect.name
+  prefix                           = var.prefix
+  cluster_name                     = "${var.prefix}-kubernetes-cluster"
+  network_plugin                   = "azure"
+  sku_tier                         = "Paid"
+  vnet_subnet_id                   = module.network.vnet_subnets[0]
+  os_disk_size_gb                  = 50
+  enable_http_application_routing  = true
+  enable_auto_scaling              = true
+  agents_min_count                 = 1
+  agents_max_count                 = 2
+  agents_count                     = null # null to avoid possible agents_count changes
+  agents_max_pods                  = 100
+  agents_pool_name                 = substr(var.prefix, 0, 12)
+  agents_availability_zones        = ["1", "2"]
+
+  agents_labels = {
+    "nodepool": "${var.prefix}-default-node-pool"
+  }
+
+  agents_tags = merge(local.tags, { "Agent": "${var.prefix}-default-node-pool-agent" })
+
+  network_policy                 = "azure"
+  net_profile_dns_service_ip     = "20.0.0.10"
+  net_profile_docker_bridge_cidr = "170.10.0.1/16"
+  net_profile_service_cidr       = "20.0.0.0/16"
+
+  tags = local.tags
+
+  depends_on = [module.network]
+}
+
+resource "local_file" "kubeconfig" { # TODO: find out why apiVersion=latest and potentially hack to update to v1
+  filename = "${path.module}/${var.prefix}-kubeconfig"
+  sensitive_content = module.aks.kube_config_raw
 }

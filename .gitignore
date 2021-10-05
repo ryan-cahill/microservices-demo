@@ -18,3 +18,4 @@ terraform/defaults.tfvars
 terraform/tfplan
 terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
+values.yml

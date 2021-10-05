@@ -5,6 +5,8 @@ parameters:
   existing_redis_hostname:
     description: Hostname of an existing redis instance to use instead of provisioning a new one
     required: false
+  cartservice_host:
+    required: false
 
 services:
   cart-db:
@@ -25,7 +27,9 @@ services:
     build:
       context: ./src
     interfaces:
-      main: 7070
+      main:
+        host: ${{ parameters.cartservice_host }}
+        port: 7070
     environment:
       PORT: 7070
       LISTEN_ADDR: 0.0.0.0

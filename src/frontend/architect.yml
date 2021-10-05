@@ -2,13 +2,13 @@ name: boutique-shop/frontend
 description: Web application serving the boutique shop microservices demo
 
 dependencies:
-  boutique-shop/product-catalog: v1
-  boutique-shop/currency: v1
-  boutique-shop/shopping-cart: v1
-  boutique-shop/recommendations: v1
-  boutique-shop/shipping: v1
-  boutique-shop/ads: v1
-  boutique-shop/checkout: v1
+  boutique-shop/product-catalog: latest
+  boutique-shop/currency: latest
+  boutique-shop/shopping-cart: latest
+  boutique-shop/recommendations: latest
+  boutique-shop/shipping: latest
+  boutique-shop/ads: latest
+  boutique-shop/checkout: latest
 
 services:
   frontend:
