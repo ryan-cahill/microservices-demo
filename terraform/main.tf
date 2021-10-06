@@ -5,32 +5,30 @@ locals {
 }
 
 resource "azurerm_resource_group" "architect" {
-  name     = "${var.prefix}-azure-resource-group"
+  name     = "architect-azure-resource-group"
   location = "East US"
 
   tags = local.tags
 }
 
 module "linuxservers" {
-  vm_hostname = "${var.prefix}-vm"
+  vm_hostname = "architect-vm"
 
   source              = "Azure/compute/azurerm"
   resource_group_name = azurerm_resource_group.architect.name
-  vm_os_simple        = "UbuntuServer" # TODO: pin to version
-  public_ip_dns       = [var.prefix]
+  vm_os_simple        = "UbuntuServer"
+  public_ip_dns       = ["architect"]
   vnet_subnet_id      = module.network.vnet_subnets[0]
 
   storage_account_type = "Standard_LRS"
 
   depends_on = [azurerm_resource_group.architect]
 
-  # vm_size = "TODO"
-
   tags = local.tags
 }
 
 module "network" {
-  vnet_name = "${var.prefix}-vnet"
+  vnet_name = "architect-vnet"
 
   source              = "Azure/network/azurerm"
   resource_group_name = azurerm_resource_group.architect.name
@@ -45,12 +43,12 @@ module "network" {
 }
 
 data "azurerm_network_security_group" "vm_nsg" {
-  name                = "architectryan-vm-nsg"
+  name                = "architect-vm-nsg"
   resource_group_name = azurerm_resource_group.architect.name
 }
 
 resource "azurerm_network_security_rule" "ssh" {
-  name                        = "${var.prefix}-ssh-rule"
+  name                        = "architect-ssh-rule"
   resource_group_name         = azurerm_resource_group.architect.name
   network_security_group_name = data.azurerm_network_security_group.vm_nsg.name
 
@@ -64,8 +62,8 @@ resource "azurerm_network_security_rule" "ssh" {
   destination_address_prefix = "*"
 }
 
-resource "azurerm_network_security_rule" "app" {
-  name                        = "${var.prefix}-app-rule"
+resource "azurerm_network_security_rule" "app" { # TODO: update for source only inside of network
+  name                        = "architect-app-rule"
   resource_group_name         = azurerm_resource_group.architect.name
   network_security_group_name = data.azurerm_network_security_group.vm_nsg.name
 
@@ -80,7 +78,7 @@ resource "azurerm_network_security_rule" "app" {
 }
 
 resource "azurerm_redis_cache" "redis" {
-  name                = "${var.prefix}-redis"
+  name                = "architect-redis"
   location            = azurerm_resource_group.architect.location
   resource_group_name = azurerm_resource_group.architect.name
 
@@ -101,7 +99,7 @@ resource "azurerm_redis_cache" "redis" {
 }
 
 resource "azurerm_redis_firewall_rule" "redis_firewall_rule" {
-  name = "${var.prefix}_redis_firewall_rule"
+  name = "architect_redis_firewall_rule"
 
   redis_cache_name    = azurerm_redis_cache.redis.name
   resource_group_name = azurerm_resource_group.architect.name
@@ -111,14 +109,14 @@ resource "azurerm_redis_firewall_rule" "redis_firewall_rule" {
 }
 
 resource "azurerm_private_endpoint" "redis_private_endpoint" {
-  name                = "${var.prefix}-private-endpoint"
+  name                = "architect-private-endpoint"
   location            = azurerm_resource_group.architect.location
   resource_group_name = azurerm_resource_group.architect.name
   subnet_id           = module.network.vnet_subnets[0]
   tags                = local.tags
 
   private_service_connection {
-    name                           = "${var.prefix}-rediscache-privatelink"
+    name                           = "architect-rediscache-privatelink"
     is_manual_connection           = false
     private_connection_resource_id = azurerm_redis_cache.redis.id
     subresource_names              = ["redisCache"]
@@ -137,13 +135,13 @@ data "azurerm_private_endpoint_connection" "private-ip" {
 }
 
 resource "azurerm_private_dns_zone" "dns_zone" {
-  name                = "${var.prefix}.privatelink.redis.cache.windows.net"
+  name                = "architect.privatelink.redis.cache.windows.net"
   resource_group_name = azurerm_resource_group.architect.name
   tags                = local.tags
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "vnet_link" {
-  name                  = "${var.prefix}-vnet-private-zone-link"
+  name                  = "architect-vnet-private-zone-link"
   resource_group_name   = azurerm_resource_group.architect.name
   private_dns_zone_name = azurerm_private_dns_zone.dns_zone.name
   virtual_network_id    = module.network.vnet_id
@@ -158,18 +156,13 @@ resource "azurerm_private_dns_a_record" "a_record" {
   records             = [data.azurerm_private_endpoint_connection.private-ip.private_service_connection.0.private_ip_address]
 }
 
-# data "azuread_group" "aks_cluster_admins" {
-#   name = "AKS-cluster-admins"
-# }
-
-
 # Enabling preview features for the Azure subscription is currently required due to https://github.com/hashicorp/terraform-provider-azurerm/issues/11396
 # https://docs.microsoft.com/en-us/azure/aks/upgrade-cluster#set-auto-upgrade-channel
 module "aks" {
   source                           = "Azure/aks/azurerm"
   resource_group_name              = azurerm_resource_group.architect.name
-  prefix                           = var.prefix
-  cluster_name                     = "${var.prefix}-kubernetes-cluster"
+  prefix                           = "architect"
+  cluster_name                     = "architect-kubernetes-cluster"
   network_plugin                   = "azure"
   sku_tier                         = "Paid"
   vnet_subnet_id                   = module.network.vnet_subnets[0]
@@ -180,14 +173,14 @@ module "aks" {
   agents_max_count                 = 2
   agents_count                     = null # null to avoid possible agents_count changes
   agents_max_pods                  = 100
-  agents_pool_name                 = substr(var.prefix, 0, 12)
+  agents_pool_name                 = substr("architect", 0, 12)
   agents_availability_zones        = ["1", "2"]
 
   agents_labels = {
-    "nodepool": "${var.prefix}-default-node-pool"
+    "nodepool": "architect-default-node-pool"
   }
 
-  agents_tags = merge(local.tags, { "Agent": "${var.prefix}-default-node-pool-agent" })
+  agents_tags = merge(local.tags, { "Agent": "architect-default-node-pool-agent" })
 
   network_policy                 = "azure"
   net_profile_dns_service_ip     = "20.0.0.10"
@@ -199,7 +192,7 @@ module "aks" {
   depends_on = [module.network]
 }
 
-resource "local_file" "kubeconfig" { # TODO: find out why apiVersion=latest and potentially hack to update to v1
-  filename = "${path.module}/${var.prefix}-kubeconfig"
+resource "local_file" "kubeconfig" {
+  filename = "${path.module}/architect-kubeconfig"
   sensitive_content = module.aks.kube_config_raw
 }
