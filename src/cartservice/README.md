@@ -2,6 +2,8 @@
 
 ## Creating Azure infrastructure
 
+If necessary, download and log in to the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) in a terminal.
+
 From the root of the project, navigate to the `terraform` directory and run the following commands to create the necessary infrastructure:
 
 ```sh
@@ -56,7 +58,7 @@ architect env:create aks --platform aks -a <your_architect_account_name>
 Create a file called `values.yml` in the root of the `microservices-demo` project with the following content and use terraform outputs as the values:
 
 ```yml
-boutique/shopping-cart*:
+boutique-shop/shopping-cart*:
   cartservice_host: <cart_service_host>
   existing_redis_hostname: <redis_host>
 ```
