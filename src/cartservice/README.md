@@ -66,16 +66,16 @@ boutique-shop/shopping-cart*:
 From the root of the `microservices-demo` project, register the boutique shop apps with the following command:
 
 ```sh
-architect register src/adservice/architect.yml &&
-architect register src/productcatalogservice/architect.yml &&
-architect register src/currencyservice/architect.yml &&
-architect register src/recommendationservice/architect.yml &&
-architect register src/shippingservice/architect.yml &&
-architect register src/paymentservice/architect.yml &&
-architect register src/emailservice/architect.yml &&
-architect register src/cartservice/architect.yml &&
-architect register src/checkoutservice/architect.yml &&
-architect register src/frontend/architect.yml
+architect register src/adservice/architect.yml -t v1 &&
+architect register src/productcatalogservice/architect.yml -t v1 &&
+architect register src/currencyservice/architect.yml -t v1 &&
+architect register src/recommendationservice/architect.yml -t v1 &&
+architect register src/shippingservice/architect.yml -t v1 &&
+architect register src/paymentservice/architect.yml -t v1 &&
+architect register src/emailservice/architect.yml -t v1 &&
+architect register src/cartservice/architect.yml -t v1 &&
+architect register src/checkoutservice/architect.yml -t v1 &&
+architect register src/frontend/architect.yml -t v1
 ```
 
 Then deploy the boutique shop services to your AKS cluster:
