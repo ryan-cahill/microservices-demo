@@ -13,7 +13,7 @@ services:
     environment:
       PORT: 8080
       ENABLE_PROFILER: 0
-      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['boutique-shop/product-catalog'].interfaces.api.host }}:${{ dependencies['boutique-shop/product-catalog'].interfaces.api.port }}
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['boutique-shop/product-catalog'].interfaces.api.url }}
 
 interfaces:
   api:
