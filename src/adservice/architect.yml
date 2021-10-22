@@ -6,7 +6,9 @@ services:
     build:
       context: .
     interfaces:
-      main: 9555
+      main:
+        port: 9555
+        protocol: grpc
     environment:
       PORT: 9555
 

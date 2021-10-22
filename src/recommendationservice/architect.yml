@@ -2,18 +2,20 @@ name: boutique-shop/recommendations
 description: Recommendations service used as part of the boutique shop microservices demo
 
 dependencies:
-  boutique-shop/product-catalog: latest
+  boutique-shop/product-catalog: v1
 
 services:
   recommendations:
     build:
       context: ./
     interfaces:
-      main: 8080
+      main:
+        port: 8080
+        protocol: grpc
     environment:
       PORT: 8080
       ENABLE_PROFILER: 0
-      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['boutique-shop/product-catalog'].interfaces.api.host }}:${{ dependencies['boutique-shop/product-catalog'].interfaces.api.port }}
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['boutique-shop/product-catalog'].interfaces.api.url }}
 
 interfaces:
   api:
