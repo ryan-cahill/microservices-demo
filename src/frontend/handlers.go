@@ -510,29 +510,3 @@ func stringinSlice(slice []string, val string) bool {
 	}
 	return false
 }
-
-func renderCurrencyLogo(currencyCode string) string {
-	logos := map[string]string{
-		"USD": "$",
-		"CAD": "$",
-		"JPY": "¥",
-		"EUR": "€",
-		"TRY": "₺",
-		"GBP": "£",
-	}
-
-	logo := "$" //default
-	if val, ok := logos[currencyCode]; ok {
-		logo = val
-	}
-	return logo
-}
-
-func stringinSlice(slice []string, val string) bool {
-	for _, item := range slice {
-		if item == val {
-			return true
-		}
-	}
-	return false
-}
