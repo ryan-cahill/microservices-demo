@@ -28,7 +28,7 @@ services:
 
   cartservice:
     build:
-      context: ./src
+      context: ./src/
     interfaces:
       main: 7070
     environment:
