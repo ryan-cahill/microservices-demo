@@ -18,9 +18,6 @@ services:
       main:
         host: ${{ parameters.existing_redis_hostname }}
         port: 6379
-    volumes:
-      data:
-        mount_path: /data
     debug:
       volumes:
         data:
