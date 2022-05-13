@@ -21,6 +21,7 @@ services:
     debug:
       volumes:
         data:
+          mount_path: /data
           host_path: ./.data
 
   cartservice:
