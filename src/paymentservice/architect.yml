@@ -11,6 +11,9 @@ services:
         protocol: grpc
     environment:
       PORT: 50051
+      ${{ if architect.environment == 'local' }}: # https://github.com/GoogleCloudPlatform/microservices-demo/issues/647
+        DISABLE_PROFILER: true
+        DISABLE_TRACING: true
 
 interfaces:
   api:
