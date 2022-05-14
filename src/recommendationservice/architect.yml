@@ -1,8 +1,8 @@
-name: boutique-shop/recommendations
+name: recommendations
 description: Recommendations service used as part of the boutique shop microservices demo
 
 dependencies:
-  boutique-shop/product-catalog: v1
+  product-catalog: v1
 
 services:
   recommendations:
@@ -15,7 +15,7 @@ services:
     environment:
       PORT: 8080
       ENABLE_PROFILER: 0
-      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['boutique-shop/product-catalog'].interfaces.api.url }}
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['product-catalog'].interfaces.api.url }}
 
 interfaces:
   api:

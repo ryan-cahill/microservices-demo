@@ -1,4 +1,4 @@
-name: boutique-shop/product-catalog
+name: product-catalog
 description: Product catalog service used as part of the boutique shop microservices demo
 
 services:

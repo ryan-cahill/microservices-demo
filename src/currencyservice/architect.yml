@@ -1,4 +1,4 @@
-name: boutique-shop/currency
+name: currency
 description: Currency service used as part of the boutique shop microservices demo
 
 services:
@@ -11,9 +11,8 @@ services:
         protocol: grpc
     environment:
       PORT: 7000
-      ${{ if architect.environment == 'local' }}: # https://github.com/GoogleCloudPlatform/microservices-demo/issues/647
-        DISABLE_PROFILER: true
-        DISABLE_TRACING: true
+      DISABLE_PROFILER: true # https://github.com/GoogleCloudPlatform/microservices-demo/issues/647
+      DISABLE_TRACING: true
 
 interfaces:
   api:

@@ -1,4 +1,4 @@
-name: boutique-shop/email
+name: email
 description: Email service used as part of the boutique shop microservices demo
 
 services:

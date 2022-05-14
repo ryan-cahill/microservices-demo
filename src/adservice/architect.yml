@@ -1,4 +1,4 @@
-name: boutique-shop/ads
+name: ads
 description: Advertisement service used as part of the boutique shop microservices demo
 
 services:
