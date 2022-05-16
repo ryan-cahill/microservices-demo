@@ -1,0 +1,18 @@
+name: ads
+description: Advertisement service used as part of the boutique shop microservices demo
+
+services:
+  ad:
+    build:
+      context: .
+    interfaces:
+      main:
+        port: 9555
+        protocol: grpc
+    environment:
+      PORT: 9555
+
+interfaces:
+  api:
+    description: Exposes the advertisement service to upstream requests
+    url: ${{ services.ad.interfaces.main.url }}

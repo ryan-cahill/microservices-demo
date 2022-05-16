@@ -1,0 +1,23 @@
+name: recommendations
+description: Recommendations service used as part of the boutique shop microservices demo
+
+dependencies:
+  product-catalog: v1
+
+services:
+  recommendations:
+    build:
+      context: ./
+    interfaces:
+      main:
+        port: 8080
+        protocol: grpc
+    environment:
+      PORT: 8080
+      ENABLE_PROFILER: 0
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['product-catalog'].interfaces.api.url }}
+
+interfaces:
+  api:
+    description: Exposes the recommendation service to upstream requests
+    url: ${{ services.recommendations.interfaces.main.url }}

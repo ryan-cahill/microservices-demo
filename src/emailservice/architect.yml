@@ -1,0 +1,18 @@
+name: email
+description: Email service used as part of the boutique shop microservices demo
+
+services:
+  email:
+    build:
+      context: ./
+    interfaces:
+      main:
+        port: 8080
+        protocol: grpc
+    environment:
+      PORT: 8080
+
+interfaces:
+  api:
+    description: Exposes the email service to upstream requests
+    url: ${{ services.email.interfaces.main.url }}

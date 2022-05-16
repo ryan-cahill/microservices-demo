@@ -1,0 +1,32 @@
+name: checkout
+description: Checkout service used as part of the boutique shop microservices demo
+
+dependencies:
+  product-catalog: v1
+  shopping-cart: v1
+  currency: v1
+  email: v1
+  payments: v1
+  shipping: v1
+
+services:
+  checkout:
+    build:
+      context: ./
+    interfaces:
+      main:
+        port: 5050
+        protocol: grpc
+    environment:
+      PORT: 5050
+      PRODUCT_CATALOG_SERVICE_ADDR: ${{ dependencies['product-catalog'].interfaces.api.url }}
+      SHIPPING_SERVICE_ADDR: ${{ dependencies['shipping'].interfaces.api.url }}
+      PAYMENT_SERVICE_ADDR: ${{ dependencies['payments'].interfaces.api.url }}
+      EMAIL_SERVICE_ADDR: ${{ dependencies['email'].interfaces.api.url }}
+      CURRENCY_SERVICE_ADDR: ${{ dependencies['currency'].interfaces.api.url }}
+      CART_SERVICE_ADDR: ${{ dependencies['shopping-cart'].interfaces.api.url }}
+
+interfaces:
+  api:
+    description: Exposes the checkout service to upstream requests
+    url: ${{ services.checkout.interfaces.main.url }}

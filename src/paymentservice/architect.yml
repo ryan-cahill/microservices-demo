@@ -1,0 +1,20 @@
+name: payments
+description: Payments service used as part of the boutique shop microservices demo
+
+services:
+  payments:
+    build:
+      context: ./
+    interfaces:
+      main:
+        port: 50051
+        protocol: grpc
+    environment:
+      PORT: 50051
+      DISABLE_PROFILER: true # https://github.com/GoogleCloudPlatform/microservices-demo/issues/647
+      DISABLE_TRACING: true
+
+interfaces:
+  api:
+    description: Exposes the payments service to upstream requests
+    url: ${{ services.payments.interfaces.main.url }}
